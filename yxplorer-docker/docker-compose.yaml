@@ -1,0 +1,9 @@
+version: '2'
+services:
+  ytool:
+    image: "rmartini/ytool"
+    ports:
+    - "8088:8088"
+    volumes:
+    - "./data:/ytool/server/yangx/data"
+
