@@ -1,0 +1,36 @@
+FROM debian:jessie
+MAINTAINER Raffo (rmartini@cisco.com)
+
+RUN apt-get update \
+	&& apt-get install -y \
+					   git \
+					   python-pip \
+					   virtualenv \
+					   libxml2-dev \
+					   libxslt1-dev \
+					   python-dev \
+					   zlib1g-dev \
+					   iputils-ping \
+					   build-essential \
+					   libssl-dev \
+					   libffi-dev \
+					   net-tools \
+					   graphviz
+
+RUN git clone https://wwwin-github.cisco.com/yang-tools/ytool.git
+
+WORKDIR /ytool/
+
+COPY heredoc-setup /ytool/
+
+RUN bash setup.sh < ./heredoc-setup
+
+# Have to bind it to either the host (but it will only be generated at runtime) or a generic 0.0.0.0
+# if bound to localhost, it will break the port forwarding
+ENV YTOOL_MASTER_HOST 0.0.0.0
+ENV YTOOL_MASTER_PORT 8088
+ENV YTOOL_MASTER_DATA /ytool/server/yangx/data
+
+EXPOSE 8088
+
+CMD ["bash","start.sh"]
