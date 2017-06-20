@@ -1,8 +1,26 @@
-# ytool-docker
-a Docker port of ytool
-https://wwwin-github.cisco.com/yang-tools/ytool
+# yang-explorer for docker
 
-All saved data will be stored on the local folder /ytool-docker/data
+Within Cisco, I built a docker image for ytool - internal tool.
+Yang-explorer is the external tool that does exactly the same thing.
+
+While I was working on porting it to a container, I realised somebody had already done it properly.
+http://noshut.ru/2017/01/yang-explorer-in-a-docker-container/
+
+Here's the instructions:
+run the container:
+```
+docker run -p 8088:8088 -d hellt/yangexplorer-docker
+```
+
+connect to yang-explorer
+```
+http://localhost:8088/static/YangExplorer.html
+```
+
+
+## OLD README - deprecated as not working
+
+All saved data will be stored on the local folder /yang-explorer/data
 
 Prerequisites:
 - docker installed on your system (including docker-compile)
@@ -12,9 +30,9 @@ Instructions:
 
 0- download this:
 ```
-git clone https://wwwin-github.cisco.com/rmartini/ytool-docker
+git clone https://github.com/raffomartini/yang-explorer
 ```
-Note: make sure the directory ```ytool-docker``` is empty or not existing, otherwise it will be modified
+Note: make sure the directory `yang-explorer` is empty or not existing, otherwise it will be modified
 
 1- build the image:
 ```
@@ -26,13 +44,10 @@ bash ./install.sh
 bash ./run.sh
 ```
 
-ytool is now available at 
+yang explorer is now available at 
 http://localhost:8088
 
 To stop the container:
 ```
 bash ./stop.sh
 ```
-
-
-# macos-hacks
